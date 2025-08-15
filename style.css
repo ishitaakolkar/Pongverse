@@ -1,111 +1,189 @@
 body {
-  background: #181c26;
   margin: 0;
-  color: #f4f4f4;
+  background: #10131c;
   font-family: 'Segoe UI', Arial, sans-serif;
+  overflow: hidden;
 }
-.menu {
+#bg-particles {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+.screen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+}
+.hidden { display: none !important; }
+.menu-content {
+  background: rgba(17,22,30,0.92);
+  border-radius: 24px;
+  box-shadow: 0 0 32px #00ffe6, 0 0 4px #0ff;
+  padding: 48px 36px 28px 36px;
   text-align: center;
-  padding-top: 60px;
+  position: relative;
+  animation: fadeIn 1.3s cubic-bezier(.55,.12,.41,.89);
 }
-.menu h1 {
-  font-size: 3em;
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98);}
+  to { opacity: 1; transform: scale(1);}
+}
+.neon-title {
+  font-size: 3.2em;
+  font-weight: 700;
   color: #0ff;
   letter-spacing: 2px;
-  margin-bottom: 0.5em;
+  text-shadow: 0 0 30px #00ffe6, 0 0 8px #0ff;
 }
-.menu .tag {
-  font-size: 0.5em;
-  color: #fffa;
-  background: #222;
-  border-radius: 8px;
-  padding: 3px 10px;
+.neon-title span {
+  color: #ff00cc;
+  text-shadow: 0 0 18px #ff00cc;
+  font-size: 0.7em;
 }
-.animated-ball {
-  margin: 32px auto 20px auto;
-  width: 44px;
-  height: 44px;
+.menu-anim {
+  margin: 20px auto 16px auto;
+  width: 244px;
+  height: 56px;
+  position: relative;
+}
+.menu-ball {
+  position: absolute;
+  top: 18px; left: 112px;
+  width: 20px; height: 20px;
   border-radius: 50%;
-  background: linear-gradient(145deg, #0ff 80%, #222 100%);
-  animation: bounce 1.2s infinite;
+  background: radial-gradient(circle at 60% 60%, #0ff 80%, #fff 100%);
+  box-shadow: 0 0 18px #0ff, 0 0 44px #0ff2;
+  animation: menuBallAnim 1.2s infinite cubic-bezier(.7,.2,.3,.7);
 }
-@keyframes bounce {
-  0% { transform: translateY(0);}
-  50% { transform: translateY(-30px);}
-  100% { transform: translateY(0);}
+@keyframes menuBallAnim {
+  0% { left:112px; top:18px;}
+  50% { left:122px; top:24px;}
+  100% { left:112px; top:18px;}
 }
-.menu-buttons button, .start-btn {
-  margin: 8px;
-  font-size: 1.2em;
-  padding: 12px 32px;
+.menu-paddle {
+  position: absolute;
+  top: 6px;
+  width: 14px; height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #0ff 70%, #fff 100%);
+  box-shadow: 0 0 24px #0ff;
+}
+.paddle-left { left:16px;}
+.paddle-right { right:16px; background: linear-gradient(270deg, #ff00cc 70%, #fff 100%); box-shadow: 0 0 24px #ff00cc;}
+.neon-btn {
+  font-size: 1.1em;
+  background: linear-gradient(90deg, #0ff 60%, #ff00cc 100%);
+  color: #10131c;
+  border: none;
+  padding: 12px 36px;
+  border-radius: 18px;
+  box-shadow: 0 0 16px #0ff8;
+  margin: 12px 2px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.2s;
+}
+.neon-btn:hover, .small:hover {
+  background: linear-gradient(90deg, #ff00cc 70%, #0ff 100%);
+  box-shadow: 0 0 28px #ff00cc8;
+}
+.small {
+  font-size: 0.98em;
+  padding: 6px 18px;
+  border-radius: 11px;
+  margin: 7px 2px;
+}
+.selectors { display: flex; justify-content: center; gap: 32px; margin: 16px 0;}
+.selectors label { color: #0ff; margin-right: 8px;}
+.selectors select, .selectors button {
+  background: #222;
+  color: #fff;
+  border: none;
   border-radius: 8px;
-  border: none;
-  background: #222;
-  color: #0ff;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.menu-buttons button:hover, .start-btn:hover {
-  background: #0ff;
-  color: #222;
-}
-.start-btn {
-  margin-top: 20px;
-  background: linear-gradient(90deg, #0ff 60%, #222 100%);
-}
-.leaderboard {
-  margin-top: 18px;
   font-size: 1em;
-  color: #fff9;
+  padding: 6px 14px;
 }
-#game-container {
+#helpBtn { position: absolute; right: 24px; top: 18px; }
+#helpPopup {
+  position: absolute;
+  top: 48px; left: 50%; transform: translateX(-50%);
+  background: #181c26ee;
+  border-radius: 22px;
+  box-shadow: 0 0 22px #0ffb;
+  padding: 30px 34px;
+  color: #fff;
+  z-index: 20;
+  display: none;
+  animation: fadeIn 0.5s;
+}
+#helpPopup h2 { color: #0ff; margin-bottom: 14px;}
+#helpPopup ul { text-align: left; margin: 0 0 18px 0;}
+.hud {
+  position: absolute;
+  top: 22px; left: 50%; transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  margin-top: 16px;
+  gap: 28px;
+  background: rgba(17,22,30,0.88);
+  padding: 10px 22px;
+  border-radius: 18px;
+  box-shadow: 0 0 18px #0ff4;
+  z-index: 4;
+  animation: fadeIn 1s;
 }
-.top-bar {
-  display: flex;
-  justify-content: space-between;
-  width: 900px;
-  margin-bottom: 8px;
-  font-size: 1.2em;
+#smartBarContainer { display: flex; align-items: center; gap:8px;}
+#smartBar { width: 80px; height: 13px; background: #222; border-radius: 6px; overflow: hidden; box-shadow: 0 0 8px #0ff;}
+#smartBarFill { height: 100%; width: 60%; background: linear-gradient(90deg,#0ff,#ff00cc); box-shadow: 0 0 14px #0ff;}
+#pongCanvas {
+  background: radial-gradient(ellipse at 50% 50%, #181c26 60%, #0ff2 110%, #181c26 100%);
+  box-shadow: 0 0 44px #0ff;
+  border-radius: 22px;
+  margin: 80px auto 10px auto;
+  display: block;
+  position: relative;
+  z-index: 1;
 }
-.top-bar button {
-  padding: 6px 16px;
-  border-radius: 6px;
-  border: none;
-  background: #222;
+#floatingText {
+  position: absolute; left: 50%; top: 30%; transform: translate(-50%,0);
+  color: #fff;
+  font-size: 2em;
+  pointer-events: none;
+  filter: drop-shadow(0 0 16px #0ff);
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.end-content {
+  background: rgba(17,22,30,0.92);
+  border-radius: 24px;
+  box-shadow: 0 0 32px #ff00cc, 0 0 4px #0ff;
+  padding: 64px 52px 40px 52px;
+  text-align: center;
+  animation: fadeIn 0.7s cubic-bezier(.55,.12,.41,.89);
+}
+#endMsg {
+  font-size: 2em;
+  color: #ff00cc;
+  text-shadow: 0 0 18px #ff00cc;
+  margin-bottom: 18px;
+}
+#finalScore {
+  font-size: 1.3em;
   color: #0ff;
-  cursor: pointer;
-  margin-left: 8px;
-  transition: background 0.2s;
+  margin-bottom: 18px;
 }
-.top-bar button:hover {
-  background: #0ff;
-  color: #222;
-}
-.controls {
-  margin-top: 10px;
-}
-.controls button {
-  background: #0ff;
-  color: #222;
-  border-radius: 6px;
-  border: none;
-  padding: 6px 20px;
-  font-size: 1em;
-  margin: 4px;
-  cursor: pointer;
-}
-.hidden { display: none; }
-@media screen and (max-width: 980px) {
-  #game-container, .top-bar { width: 100vw; }
-  #pong-canvas { width: 98vw !important; height: 60vw !important; }
+@media screen and (max-width: 1100px) {
+  #pongCanvas { width: 99vw !important; height: 65vw !important;}
+  .hud { width: 99vw;}
 }
 @media screen and (max-width: 700px) {
-  .menu h1 { font-size: 2em; }
-  #game-container { margin-top: 4px; }
-  .top-bar { font-size: 1em; }
-  #pong-canvas { height: 55vw !important; }
+  .menu-content, .end-content { padding: 22px 6px;}
+  .hud { flex-direction: column; gap:12px;}
+  #smartBar { width: 50vw;}
 }
