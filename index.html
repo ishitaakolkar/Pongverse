@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pong Neon ML - Clarity Edition</title>
+  <title>Pong ML - Clear Vision Edition</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -10,7 +10,7 @@
   <div id="bg-particles"></div>
   <div id="menu" class="screen">
     <div class="menu-content">
-      <h1 class="neon-title">Pong <span>Neon ML</span></h1>
+      <h1 class="neon-title">Pong <span>ML</span></h1>
       <div class="menu-anim">
         <div class="menu-paddle paddle-left"></div>
         <div class="menu-ball"></div>
@@ -33,13 +33,15 @@
             <option value="qlearn">Q-Learning</option>
           </select>
         </div>
-        <div>
-          <label for="soundToggle">Sound:</label>
-          <button class="neon-btn small" id="soundToggle">On</button>
-        </div>
-        <div>
-          <label for="trailToggle">Trail:</label>
-          <button class="neon-btn small" id="trailToggle">Off</button>
+        <div class="toggle-group">
+          <div>
+            <label for="soundToggle">Sound:</label>
+            <button class="toggle-btn" id="soundToggle">On</button>
+          </div>
+          <div>
+            <label for="effectsToggle">Visual Effects:</label>
+            <button class="toggle-btn" id="effectsToggle">Off</button>
+          </div>
         </div>
       </div>
       <button class="neon-btn small" id="helpBtn">?</button>
@@ -51,7 +53,7 @@
         <li>Hit the ball with paddle edges for more spin & control</li>
         <li>Ball gets faster with every hit—keep up!</li>
         <li>Pause with <b>P</b>, Reset with <b>R</b></li>
-        <li>Try to beat the AI! Good luck!</li>
+        <li>Visual effects can be toggled in settings</li>
       </ul>
       <button class="neon-btn small" id="closeHelp">Close</button>
     </div>
@@ -62,16 +64,16 @@
       <div id="difficultyDisplay"></div>
       <div id="aiDisplay"></div>
       <div id="smartBarContainer">
-        <span>AI Smartness</span>
+        <span>AI Progress</span>
         <div id="smartBar"><div id="smartBarFill"></div></div>
       </div>
-      <button class="neon-btn small" id="pauseBtn">Pause</button>
-      <button class="neon-btn small" id="resetBtn">Reset</button>
-      <button class="neon-btn small" id="soundBtn">🔊</button>
-      <button class="neon-btn small" id="trailBtn">Trail: Off</button>
+      <div class="game-controls">
+        <button class="control-btn" id="pauseBtn">Pause</button>
+        <button class="control-btn" id="resetBtn">Reset</button>
+        <button class="control-btn" id="soundBtn">🔊</button>
+      </div>
     </div>
     <canvas id="pongCanvas" width="960" height="600"></canvas>
-    <div id="floatingText"></div>
   </div>
   <div id="end" class="screen hidden">
     <div class="end-content">
@@ -85,6 +87,6 @@
   <audio id="hitSound" src="assets/hit.wav"></audio>
   <audio id="wallSound" src="assets/wall.wav"></audio>
   <audio id="scoreSound" src="assets/score.wav"></audio>
-  <script src="game.js"></script>
 </body>
+<script src="game.js"></script>
 </html>
