@@ -2,37 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pong ML - DQN Edition</title>
+  <title>Pong Neon ML</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="main-menu" class="menu animated">
-    <h1>Pong ML <span class="tag">DQN Edition</span></h1>
-    <div class="animated-ball"></div>
-    <div class="menu-buttons">
-      <button onclick="setDifficulty('easy')">Easy</button>
-      <button onclick="setDifficulty('medium')">Medium</button>
-      <button onclick="setDifficulty('hard')">Hard</button>
-      <button onclick="toggleMultiplayer()">Multiplayer</button>
+  <div id="bg-particles"></div>
+  <div id="menu" class="screen">
+    <div class="menu-content">
+      <h1 class="neon-title">Pong <span>Neon ML</span></h1>
+      <div class="menu-anim">
+        <div class="menu-paddle paddle-left"></div>
+        <div class="menu-ball"></div>
+        <div class="menu-paddle paddle-right"></div>
+      </div>
+      <button class="neon-btn" id="playBtn">Play</button>
+      <div class="selectors">
+        <div>
+          <label for="difficulty">Difficulty:</label>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <div>
+          <label for="aiMode">AI Mode:</label>
+          <select id="aiMode">
+            <option value="dqn">DQN</option>
+            <option value="qlearn">Q-Learning</option>
+          </select>
+        </div>
+        <div>
+          <label for="soundToggle">Sound:</label>
+          <button class="neon-btn small" id="soundToggle">On</button>
+        </div>
+      </div>
+      <button class="neon-btn small" id="helpBtn">?</button>
     </div>
-    <button class="start-btn" onclick="startGame()">Start Game</button>
-    <div class="leaderboard" id="leaderboard"></div>
+    <div id="helpPopup">
+      <h2>How to Play</h2>
+      <ul>
+        <li>Move your paddle with mouse, touch, or arrow keys</li>
+        <li>Hit the ball with paddle edges for more spin & control</li>
+        <li>Ball gets faster with every hit—keep up!</li>
+        <li>Pause with <b>P</b>, Reset with <b>R</b></li>
+        <li>Try to beat the AI! Good luck!</li>
+      </ul>
+      <button class="neon-btn small" id="closeHelp">Close</button>
+    </div>
   </div>
-  <div id="game-container" class="hidden">
-    <div class="top-bar">
-      <span id="score">Player: 0 | AI: 0</span>
-      <span id="ai-level">AI Level: 1</span>
-      <span id="difficulty">Difficulty: Medium</span>
-      <button onclick="pauseGame()">Pause</button>
-      <button onclick="resetGame()">Reset</button>
+  <div id="game" class="screen hidden">
+    <div class="hud">
+      <div id="scoreDisplay"></div>
+      <div id="difficultyDisplay"></div>
+      <div id="aiDisplay"></div>
+      <div id="smartBarContainer">
+        <span>AI Smartness</span>
+        <div id="smartBar"><div id="smartBarFill"></div></div>
+      </div>
+      <button class="neon-btn small" id="pauseBtn">Pause</button>
+      <button class="neon-btn small" id="resetBtn">Reset</button>
+      <button class="neon-btn small" id="soundBtn">🔊</button>
     </div>
-    <canvas id="pong-canvas" width="900" height="520"></canvas>
-    <div class="controls">
-      <button onclick="resumeGame()">Resume</button>
-      <button onclick="showMenu()">Menu</button>
+    <canvas id="pongCanvas" width="960" height="600"></canvas>
+    <div id="floatingText"></div>
+  </div>
+  <div id="end" class="screen hidden">
+    <div class="end-content">
+      <h2 id="endMsg"></h2>
+      <div id="finalScore"></div>
+      <button class="neon-btn" id="playAgainBtn">Play Again</button>
+      <button class="neon-btn small" id="backMenuBtn">Menu</button>
     </div>
   </div>
+  <audio id="bgMusic" src="assets/bg_music.mp3" loop></audio>
+  <audio id="hitSound" src="assets/hit.wav"></audio>
+  <audio id="wallSound" src="assets/wall.wav"></audio>
+  <audio id="scoreSound" src="assets/score.wav"></audio>
   <script src="game.js"></script>
 </body>
 </html>
