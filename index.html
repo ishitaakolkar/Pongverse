@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pong ML - DQN Edition</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="main-menu" class="menu animated">
+    <h1>Pong ML <span class="tag">DQN Edition</span></h1>
+    <div class="animated-ball"></div>
+    <div class="menu-buttons">
+      <button onclick="setDifficulty('easy')">Easy</button>
+      <button onclick="setDifficulty('medium')">Medium</button>
+      <button onclick="setDifficulty('hard')">Hard</button>
+      <button onclick="toggleMultiplayer()">Multiplayer</button>
+    </div>
+    <button class="start-btn" onclick="startGame()">Start Game</button>
+    <div class="leaderboard" id="leaderboard"></div>
+  </div>
+  <div id="game-container" class="hidden">
+    <div class="top-bar">
+      <span id="score">Player: 0 | AI: 0</span>
+      <span id="ai-level">AI Level: 1</span>
+      <span id="difficulty">Difficulty: Medium</span>
+      <button onclick="pauseGame()">Pause</button>
+      <button onclick="resetGame()">Reset</button>
+    </div>
+    <canvas id="pong-canvas" width="900" height="520"></canvas>
+    <div class="controls">
+      <button onclick="resumeGame()">Resume</button>
+      <button onclick="showMenu()">Menu</button>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
