@@ -1,13 +1,3 @@
-"""
-Core game engine for Pongverse.
-
-Implements the main game logic, physics, and state management
-separate from the UI and AI components.
-
-Author: @ishitaakolkar
-Date: 2025-08-15
-"""
-
 from dataclasses import dataclass
 from typing import Tuple, Optional, Dict
 import numpy as np
